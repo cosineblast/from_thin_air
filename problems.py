@@ -1,5 +1,5 @@
 """
-=== Adapt Algoritms!
+=== from thin air challenge
 
 This is a small challenge intended to teach you on how to
 adapting existing algorithms into new ones.
