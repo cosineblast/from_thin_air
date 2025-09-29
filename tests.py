@@ -1,4 +1,3 @@
-
 import sys
 import thin_air
 import problems
@@ -11,6 +10,7 @@ try:
 except ImportError:
 
     import re
+
     class BasicConsole:
         def print(self, *args, **kwargs):
             no_bb = [self.__remove_bbcode(arg) for arg in args]
@@ -18,15 +18,15 @@ except ImportError:
             print(*no_bb, **kwargs)
 
         def rule(self, *args, **kwargs):
-            print('  ===============  ', *args, '  ===')
+            print("  ===============  ", *args, "  ===")
 
         def __remove_bbcode(self, string):
-            b = '\\[(\\w|\\s)+\\](.*?)\\[/(\\w|\\s)+\\]'
-            r = '\\2'
+            b = "\\[(\\w|\\s)+\\](.*?)\\[/(\\w|\\s)+\\]"
+            r = "\\2"
             return re.sub(b, r, string)
-        
+
     console = BasicConsole()
-    
+
 
 last_args = None
 
@@ -105,16 +105,25 @@ def get_test_cases():
         return int(b**n)
 
     @exercise(
-        [ base([]), step([1]), step([2]), step([3]), ] +
-        [step(random_list(size)) for size in [2,4,8,16,32,64,128,256]]
+        [
+            base([]),
+            step([1]),
+            step([2]),
+            step([3]),
+        ]
+        + [step(random_list(size)) for size in [2, 4, 8, 16, 32, 64, 128, 256]]
     )
     def list_sum(stuff):
         assert isinstance(stuff, list)
         return sum(stuff)
 
     @exercise(
-        [ base([1]), base([2]), base([-4]), ] +
-        [ step(random_list(2 ** n)) for n in range(2, 16) ]
+        [
+            base([1]),
+            base([2]),
+            base([-4]),
+        ]
+        + [step(random_list(2**n)) for n in range(2, 16)]
     )
     def list_max(stuff):
         assert isinstance(stuff, list)
@@ -122,13 +131,19 @@ def get_test_cases():
 
     @exercise(
         # empty list
-        [base(n, []) for n in random_list(10)] + 
-
+        [base(n, []) for n in random_list(10)]
+        +
         # x is in the stuff
-        [(lambda stuff: base(random.choice(stuff), stuff))(random_list(2 ** n)) for n in range(2, 8)] +
-
+        [
+            (lambda stuff: base(random.choice(stuff), stuff))(random_list(2**n))
+            for n in range(2, 8)
+        ]
+        +
         # x is not in the stuff
-        [(lambda stuff: step(max(stuff) + 1, stuff))(random_list(2 ** n)) for n in range(2, 8)]
+        [
+            (lambda stuff: step(max(stuff) + 1, stuff))(random_list(2**n))
+            for n in range(2, 8)
+        ]
     )
     def list_element(x, stuff):
         assert isinstance(x, int)
@@ -168,6 +183,7 @@ def import_problem_or_none(name):
         return getattr(problems, name)
     except AttributError:
         return None
+
 
 def run_test_case(test):
     global current_test
@@ -227,7 +243,6 @@ def main():
 
     for test in get_test_cases():
         run_test_case(test)
-
 
     console.print("[green] well done![/green]")
     console.print(" i think you you should try [red bold]recursion[/red bold] ;)")

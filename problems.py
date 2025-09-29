@@ -110,6 +110,7 @@ def pow(b, n):
 
 # Part 1: list-related exercises
 
+
 def list_sum(stuff):
     """
     Given a list of integers, the list_sum function computes the sum of the numbers of this list.
