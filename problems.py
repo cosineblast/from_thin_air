@@ -45,6 +45,7 @@ Here are the main rules:
     your_function(3,8) must NOT call solve(4,8) (first argument is greater )
     your_function(3,8) must NOT call solve(3,9) (second argument is greater)
     your_function(3,8) must NOT call solve(3,8) (no argument is smaller    )
+   Additionally, lists are compared by their sizes.
    
 You can verify your solutions by running `python3 thin_air.py`,
 which will load all the exercise functions of the current module (`problems.py`)

@@ -19,7 +19,7 @@ and you always have to use `solve` with an argument that is less than the one yo
 (in other words, you can't cheat by calling `solve` on the original input itself).
 
 This skills can be really useful for developing new algorithms to solve problems, and
-can help you tame other subjects which are typically [more scary](https://en.wikipedia.org/wiki/Recursion).
+can help you tame other subjects which are typically more scary. You'll know it when you see it.
 
 ## running this project
 
