@@ -130,7 +130,7 @@ def largest_digit(n):
     >>> largest_digit(101)
     1
     """
-    return 0 if n == 0 else max(n % 10, solve(n // 10))
+    pass
 
 def count_bits(n):
     """
@@ -155,7 +155,7 @@ def count_bits(n):
     >>> count_bits(0)
     0
     """
-    return 0 if n == 0 else n % 2 + solve(n//2)
+    pass
 
 def reverse_digits(n):
     """
@@ -175,12 +175,8 @@ def reverse_digits(n):
     >>> count_bits(0)
     (0, 0)
     """
-    if n == 0:
-        return (0, 0)
-    
-    (count, rev) = solve(n // 10)
+    pass
 
-    return (count + 1, (n % 10) * (10 ** count) + rev) 
 # Part 1: list-related exercises
 
 
@@ -204,7 +200,6 @@ def list_sum(stuff):
     """
     return 0 if stuff == [] else stuff[0] + solve(stuff[1:])
 
-# The following exercise is already solved for you.
 def list_product(stuff):
     """
     Given a list of integers, the list_product function computes the product of the numbers of this list.
@@ -222,7 +217,7 @@ def list_product(stuff):
     >>> list_sum(list(range(1, 6)))
     720
     """
-    return 1 if stuff == [] else stuff[0] * solve(stuff[1:])
+    pass
 
 def list_max(stuff):
     """
@@ -241,7 +236,7 @@ def list_max(stuff):
     >>> list_max([2, 77, 2, 42])
     77
     """
-    return stuff[0] if len(stuff) == 1 else max(stuff[0], solve(stuff[1:]))
+    pass
 
 
 def list_element(x, stuff):
@@ -262,7 +257,7 @@ def list_element(x, stuff):
     >>> list_element(77, [2, 77, 2, 42])
     True
     """
-    return False if len(stuff) == 0 else x == stuff[0] or solve(x, stuff[1:])
+    pass
 
 def list_frequencies(stuff):
     """
@@ -282,18 +277,7 @@ def list_frequencies(stuff):
     >>> list_frequencieslement(['beep', 'boop', 'beep'])
     {'beep': 2, 'boop': 1}
     """
-
-    if stuff == []:
-        return {}
-    else:
-        next = solve(stuff[1:])
-
-        if stuff[0] in next:
-            next[stuff[0]] += 1
-        else:
-            next[stuff[0]] = 1
-
-        return next
+    pass
 
 def list_mul_10(stuff):
     """
@@ -313,7 +297,7 @@ def list_mul_10(stuff):
     >>> list_mul_10([7, 80, 42])
     [70, 800, 420]
     """
-    return [] if stuff == [] else [10 * stuff[0]] + solve(stuff[1:])
+    pass
 
 
 def list_reverse(stuff):
@@ -333,7 +317,7 @@ def list_reverse(stuff):
     >>> list_reverse([2, 5, 7])
     [7, 5, 2]
     """
-    return [] if stuff == [] else solve(stuff[1:]) + [stuff[0]]
+    pass
 
 
 def list_remove_odds(stuff):
@@ -356,10 +340,7 @@ def list_remove_odds(stuff):
     >>> list_remove_odds([1])
     [1]
     """
-    if stuff == []:
-        return []
-    x = stuff[0]
-    return ([x] if x % 2 == 0 else []) + solve(stuff[1:])
+    pass
 
 def list_replicate(n, x):
     """
@@ -378,7 +359,7 @@ def list_replicate(n, x):
     >>> list_replicate(1, 'beep')
     ['beep']
     """
-    return [] if n == 0 else [x] + solve(n-1, x)
+    pass
 
 def list_sort(stuff):
     """
@@ -398,13 +379,4 @@ def list_sort(stuff):
     >>> sort([1, 2, 3])
     [1, 2, 3]
     """
-
-    if stuff == []:
-        return []
-
-    least = min(stuff)
-    least_index = stuff.index(least)
-
-    without_least = stuff[:least_index] + stuff[least_index+1:]
-
-    return [least] + solve(without_least)
+    pass
