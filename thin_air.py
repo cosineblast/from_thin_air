@@ -1,5 +1,6 @@
-solve_function = None
 
+def _solve(*args):
+    pass
 
 def solve(*args):
-    return solve_function(*args)
+    return _solve(*args)

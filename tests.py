@@ -2,6 +2,7 @@ import sys
 import thin_air
 import problems
 import random
+import functools
 
 try:
     import rich.console
@@ -35,14 +36,16 @@ last_args = None
 # each element pairwise recursively if necessary
 def is_less(x, y):
     if (
-        isinstance(x, str)
-        and isinstance(y, str)
-        or isinstance(x, int)
+        isinstance(x, int)
         and isinstance(y, int)
         or isinstance(x, float)
         and isinstance(y, float)
     ):
         return x < y
+
+    if (isinstance(x, str) and isinstance(y, str)
+        or isinstance(x, list) and isinstance(y, list)):
+        return len(x) < len(y)
 
     return compare_sequences_for_less(x, y)
 
@@ -104,6 +107,21 @@ def get_test_cases():
         assert n >= 0
         return int(b**n)
 
+    @exercise([base(0)] + [step(n+1) for n in random_list(20)])
+    def count_bits(n):
+        return sum(map(int, '{:b}'.format(n)))
+
+    @exercise([base(0)] + [step(n+1) for n in random_list(20)])
+    def largest_digit(n):
+        return max(map(int, str(n)))
+
+    @exercise([base(0)] + [step(n+1) for n in random_list(20)])
+    def reverse_digits(n):
+        if n == 0: return (0, 0)
+        size =  len(str(n))
+        reverse = int(''.join(reversed(str(n))))
+        return (size, reverse)
+
     @exercise(
         [
             base([]),
@@ -116,6 +134,20 @@ def get_test_cases():
     def list_sum(stuff):
         assert isinstance(stuff, list)
         return sum(stuff)
+
+    @exercise(
+        [
+            base([]),
+            step([1]),
+            step([2]),
+            step([3]),
+            step([1,2,3,4,5,6])
+        ]
+        + [step(random_list(size)) for size in [2, 4, 8, 16, 32, 64, 128, 256]]
+    )
+    def list_product(stuff):
+        assert isinstance(stuff, list)
+        return functools.reduce(lambda x,y: x * y, stuff, 1)
 
     @exercise(
         [
@@ -150,7 +182,57 @@ def get_test_cases():
         assert isinstance(stuff, list)
         return x in stuff
 
+    @exercise([base([])] + [ step(random_list(2 ** n)) for n in range(2, 12) ])
+    def list_mul_10(stuff):
+        assert isinstance(stuff, list)
+        return [x * 10 for x in stuff]
+
+    @exercise([base([])] + [ step(random_list(2 ** n)) for n in range(2, 12) ])
+    def list_frequencies(stuff):
+        result = {}
+        for element in stuff:
+            if element not in result:
+                result[element] = 0
+
+            result[element] += 1
+            
+        return result
+
+    @exercise([base([])] + [ step(random_list(2 ** n)) for n in range(2, 12) ])
+    def list_reverse(stuff):
+        return list(reversed(stuff))
+
+    @exercise([base([])] + [ step(random_list(2 ** n)) for n in range(2, 12) ])
+    def list_remove_odds(stuff):
+        return [x for x in stuff if x % 2 == 0]
+
+    @exercise([base(0, k) for k in range(10)] + [step(2 ** n, 'beep') for n in range(2, 8) ])
+    def list_replicate(n, x):
+        return [x] * n
+
+    @exercise([base([])] + [base([k]) for k in range(10)] + [step(random_list(2 ** n)) for n in range(2, 8)])
+    def list_sort(x):
+        return list(sorted(x))
+
     return all_exercises
+
+    @exercise([base(1)] + [step(n+1) for n in random_list(20)])
+    def prime_factors(n):
+        assert isinstance(n, int)
+        assert n > 0
+
+        if n == 1: return set()
+
+        result = set()
+
+        for p in range(2, n+1):
+            if n % p == 0:
+                result.add(p)
+
+                while n % p == 0:
+                    n = n // p
+
+        return result
 
 
 current_test = None
@@ -212,7 +294,7 @@ def run_test_case(test):
     print("     {}   ".format(name), end="")
     current_test = name
 
-    thin_air.solve_function = new_solve_function
+    thin_air._solve = new_solve_function
 
     for example, kind in examples:
         global last_args
@@ -245,7 +327,7 @@ def main():
         run_test_case(test)
 
     console.print("[green] well done![/green]")
-    console.print(" i think you you should try [red bold]recursion[/red bold] ;)")
+    console.print(" you may not know it now, but you have learned [red bold]recursion[/red bold]")
 
 
 if __name__ == "__main__":
