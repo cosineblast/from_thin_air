@@ -5,10 +5,30 @@
 import sys
 import thin_air
 import problems
-import rich.console
-from rich.panel import Panel
 
-console = rich.console.Console()
+try:
+    import rich.console
+
+    console = rich.console.Console()
+except ImportError:
+
+    import re
+    class BasicConsole:
+        def print(self, *args, **kwargs):
+            no_bb = [self.__remove_bbcode(arg) for arg in args]
+
+            print(*no_bb, **kwargs)
+
+        def rule(self, *args, **kwargs):
+            print('  ===============  ', *args, '  ===')
+
+        def __remove_bbcode(self, string):
+            b = '\\[(\\w|\\s)+\\](.*?)\\[/(\\w|\\s)+\\]'
+            r = '\\2'
+            return re.sub(b, r, string)
+        
+    console = BasicConsole()
+    
 
 last_args = None
 
@@ -174,63 +194,67 @@ def import_problem_or_none(name):
     except AttributError:
         return None
 
+def run_test_case(test):
+    name = test["name"]
+    implementation = test["implementation"]
+    examples = test["examples"]
+
+    did_call = [False]
+
+    def new_solve_function(*args):
+        assert last_args is not None
+
+        ensure(
+            is_less(args, last_args),
+            kind="non shrinking argument",
+            message=(
+                "The argument passed down to [bold green]solve[/bold green] was not less than the one passed to your function."
+                "\n  Your function received {}, but {} was passed to solve"
+            ).format(last_args, args),
+        )
+
+        did_call[0] = True
+
+        return implementation(*args)
+
+    print("     {}   ".format(name), end="")
+    current_test = name
+
+    thin_air.solve_function = new_solve_function
+
+    for example, kind in examples:
+        global last_args
+        last_args = example
+        did_call[0] = False
+        expected = implementation(*example)
+        got = getattr(problems, name)(*example)
+        ensure(
+            expected == got,
+            kind="wrong answer",
+            message="The expected output for this input is {} but your implementation returned {}".format(
+                expected, got
+            ),
+        )
+        ensure(
+            did_call[0] or kind == "base",
+            kind="missing call to solve",
+            message="Your function is expected to call [green bold]thin_air.solve[/green bold] for this particular case, but it is not doing so.",
+        )
+        print(".", end="")
+
+    console.print(" [bold green]ok![/bold green]")
+
 
 def main():
     console.rule("RUNNING TESTS", style="bold")
     global current_test
 
     for test in get_test_cases():
-        name = test["name"]
-        implementation = test["implementation"]
-        examples = test["examples"]
+        run_test_case(test)
 
-        did_call = [False]
-
-        def new_solve_function(*args):
-            assert last_args is not None
-
-            ensure(
-                is_less(args, last_args),
-                kind="non shrinking argument",
-                message=(
-                    "The argument passed down to [bold green]solve[/bold green] was not less than the one passed to your function."
-                    "\n  Your function received {}, but {} was passed to solve"
-                ).format(last_args, args),
-            )
-
-            did_call[0] = True
-
-            return implementation(*args)
-
-        print("     {}   ".format(name), end="")
-        current_test = name
-
-        thin_air.solve_function = new_solve_function
-
-        for example, kind in examples:
-            global last_args
-            last_args = example
-            did_call[0] = False
-            expected = implementation(*example)
-            got = getattr(problems, name)(*example)
-            ensure(
-                expected == got,
-                kind="wrong answer",
-                message="The expected output for this input is {} but your implementation returned {}".format(
-                    expected, got
-                ),
-            )
-            ensure(
-                did_call[0] or kind == "base",
-                kind="missing call to solve",
-                message="Your function is expected to call [green bold]thin_air.solve[/green bold] for this particular case, but it is not doing so.",
-            )
-            print(".", end="")
-
-        console.print(" [bold green]ok![/bold green]")
 
     console.print("[green] well done![/green].")
-    console.print(" now you know recursion ;]")
+    console.print(" i think you you should try [red]recursion[/red] ;)")
 
 
 if __name__ == "__main__":
