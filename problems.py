@@ -2,7 +2,7 @@
 === from thin air challenge
 
 This is a small challenge intended to teach you on how to
-adapting existing algorithms into new ones.
+adapt existing algorithms into new ones.
 
 The main goal is to exercise the programmer's ability to answer the following question:
 
@@ -54,6 +54,11 @@ This challenge develops skills can be really useful for developing algorithms to
 solve problems, when combined with other programming techniques.
 
 Give it a try!
+
+Tips:
+
+If you feel tempted to use a builtin python function that does what an exercise
+asks you to implement, why not just use `solve`?
 """
 
 
@@ -62,6 +67,22 @@ def pow(b, n):
     """
     Given two non-negative integers, b and n the function `pow` must compute b raised to the n-th
     power. (i.e b ** n).
+
+    Examples:
+    >>> pow(10, 0)
+    1
+
+    >>> pow(0, 0)
+    1
+
+    >>> pow(2, 6)
+    64
+
+    >>> pow(10, 4)
+    10000
+
+    >>> pow(7, 5)
+    16807
     """
 
     # technically, we could just do
@@ -84,15 +105,28 @@ def pow(b, n):
     if n == 0:
         return 1
 
-    b_to_n_minus_1 = solve(b, n - 1)
-
-    return b * b_to_n_minus_1
+    return b * solve(b, n - 1)
 
 
 # Part 1: list-related exercises
 
-
 def list_sum(stuff):
+    """
+    Given a list of integers, the list_sum function computes the sum of the numbers of this list.
+
+    Examples:
+    >>> list_sum([])
+    0
+
+    >>> list_sum([42])
+    42
+
+    >>> list_sum([9, 10])
+    19
+
+    >>> list_sum(list(range(10)))
+    45
+    """
     return 0 if len(stuff) == 0 else stuff[0] + solve(stuff[1:])
 
 

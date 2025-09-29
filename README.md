@@ -3,7 +3,7 @@
 # `from thin_air` challenge
 
 This is a small challenge intended to teach you on how to
-adapting existing algorithms into new ones.
+adapt existing algorithms into new ones.
 
 The main goal is to exercise the programmer's ability to answer the following question:
 
@@ -18,18 +18,33 @@ an existing helper function `solve` that can solve this same problem for you,
 and you always have to use `solve` with an argument that is less than the one your function received
 (in other words, you can't cheat by calling `solve` on the original input itself).
 
-This skills can be really useful for developing new algorithms to solve problems, when combined
-with other concepts that are typically [more scary](https://en.wikipedia.org/wiki/Recursion).
+This skills can be really useful for developing new algorithms to solve problems, and
+can help you tame other subjects which are typically [more scary](https://en.wikipedia.org/wiki/Recursion).
 
 ## running this project
 
-You can clone this repository with
+You can clone the whole repository with
 
 ```bash
   git clone  https://github.com/cosineblast/from_thin_air
 ```
 
-Then run things with 
+The challenge itself resides in `problems.py`, which you'll modify.
+You can run the tests by executing `tests.py` with `python3 tests.py`.
+The tests will initially fail, you edit `problems.py` to make them pass.
 
-TODO
+Have fun!
+
+### optional: prettier output
+
+This project is self-contained, it does not depend on external python libraries.
+However, you may benefit from prettier test output by installing the `rich` python library:
+
+```bash
+python3 -m venv env
+source env/bin/activate
+pip install rich
+````
+
+Then run `python3 tests.py` as usual.
 
