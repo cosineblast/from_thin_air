@@ -22,10 +22,10 @@ from thin_air import solve
 """
 This function is a bit special, it always behaves like a correct
 implementation of the function the exercise currently asks you to implement.
-So, for instance, while inside of an exercise function that asks you to implement a function that
-sorts a list, `solve` behaves like a function that does exactly that.
+So, for instance, while inside of an exercise function that asks you to implement sorting,
+ `solve` behaves like a function that does exactly that.
  
-These exercise functions have documentation comments explaining their intended beheavior,
+These exercise functions have documentation comments explaining their intended behavior,
 but their bodies are intially just `pass` (i.e they do nothing, and fail the tests).
 Your goal is to fill in the bodies of these functions, to make so that they match the behavior
 described by their respective comments.
@@ -47,7 +47,7 @@ Here are the main rules:
     your_function(3,8) must NOT call solve(3,8) (no argument is smaller    )
    Additionally, lists are compared by their sizes.
    
-You can verify your solutions by running `python3 thin_air.py`,
+You can verify your solutions by running `python3 tests.py`,
 which will load all the exercise functions of the current module (`problems.py`)
 and check their correctness.
 
