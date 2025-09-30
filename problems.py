@@ -229,7 +229,10 @@ def list_sum(stuff):
     >>> list_sum(list(range(10)))
     45
     """
-    pass
+    if stuff == []:
+        return 0
+    else:
+        return stuff[0] + solve(stuff[1:])
 
 def list_product(stuff):
     """
@@ -262,7 +265,7 @@ def list_max(stuff):
     3
 
     >>> list_max(list(range(10)))
-    10
+    9
 
     >>> list_max([2, 77, 2, 42])
     77
@@ -349,7 +352,7 @@ def list_remove_odds(stuff):
     [2]
 
     >>> list_remove_odds([1])
-    [1]
+    []
     """
     pass
 
