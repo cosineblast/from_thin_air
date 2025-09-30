@@ -338,6 +338,10 @@ def run_test_case(test):
 
     console.print(" [bold green]ok![/bold green]")
 
+import base64
+
+def unwrap_spoiler():
+    return base64.b64decode(b'cmVjdXJzaW9u').decode('utf-8')
 
 def main():
     console.rule("RUNNING TESTS", style="bold")
@@ -348,7 +352,7 @@ def main():
 
     if total_skipped == 0:
         console.print("[green] well done![/green]")
-        console.print(" you may not know it now, but you have learned [red bold]recursion[/red bold]")
+        console.print(" you may not know it now, but you have learned [red bold]{}[/red bold]".format(unwrap_spoiler()))
         console.print()
     else:
         console.print()
