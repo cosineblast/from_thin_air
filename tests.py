@@ -107,6 +107,15 @@ def get_test_cases():
         return int(b**n)
 
     @exercise(
+        [base(0)]
+        + [step(n) for n in range(1, 10)]
+    )
+    def factorial(n):
+        assert isinstance(n, int)
+        assert n >= 0
+        return functools.reduce(lambda x,y: x * y, range(1, n+1), 1)
+
+    @exercise(
         [base(0), base(1)]
         + [step(n) for n in range(2, 20)]
     )
@@ -124,24 +133,14 @@ def get_test_cases():
 
         return a
 
-
-    @exercise(
-        [base(0)]
-        + [step(n) for n in range(1, 10)]
-    )
-    def factorial(n):
-        assert isinstance(n, int)
-        assert n >= 0
-        return functools.reduce(lambda x,y: x * y, range(1, n+1), 1)
-
+    @exercise([base(0)] + [step(n+1) for n in random_list(20)])
+    def largest_digit(n):
+        return max(map(int, str(n)))
 
     @exercise([base(0)] + [step(n+1) for n in random_list(20)])
     def count_bits(n):
         return sum(map(int, '{:b}'.format(n)))
 
-    @exercise([base(0)] + [step(n+1) for n in random_list(20)])
-    def largest_digit(n):
-        return max(map(int, str(n)))
 
     @exercise([base(0)] + [step(n+1) for n in random_list(20)])
     def reverse_digits(n):
@@ -216,17 +215,6 @@ def get_test_cases():
         return [x * 10 for x in stuff]
 
     @exercise([base([])] + [ step(random_list(2 ** n)) for n in range(2, 12) ])
-    def list_frequencies(stuff):
-        result = {}
-        for element in stuff:
-            if element not in result:
-                result[element] = 0
-
-            result[element] += 1
-            
-        return result
-
-    @exercise([base([])] + [ step(random_list(2 ** n)) for n in range(2, 12) ])
     def list_reverse(stuff):
         return list(reversed(stuff))
 
@@ -237,6 +225,17 @@ def get_test_cases():
     @exercise([base(0, k) for k in range(10)] + [step(2 ** n, 'beep') for n in range(2, 8) ])
     def list_replicate(n, x):
         return [x] * n
+
+    @exercise([base([])] + [ step(random_list(2 ** n)) for n in range(2, 12) ])
+    def list_frequencies(stuff):
+        result = {}
+        for element in stuff:
+            if element not in result:
+                result[element] = 0
+
+            result[element] += 1
+            
+        return result
 
     @exercise([base([])] + [base([k]) for k in range(10)] + [step(random_list(2 ** n)) for n in range(2, 8)])
     def list_sort(x):

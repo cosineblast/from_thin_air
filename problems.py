@@ -109,19 +109,6 @@ def pow(b, n):
 
     return b * solve(b, n - 1)
 
-def fib(n):
-    """
-    Given a non-negative integer n, computes the n-th fibonacci number.
-    The 0th fibonacci number is defined as 0
-    The 1th fibonacci number is defined as 1
-    The nth fibonacci number is defined as fib(n-1) + fib(n-2), if n >= 2
-
-    Examples:
-    >>> [fib(0), fib(1), fib(2), fib(3), fib(4), fib(5), fib(6)]
-    [0, 1, 1, 2, 3, 5, 8]
-    """
-    pass
-
 def factorial(n):
     """
     Given a non-negative integer n, computes the factorial of n, which equals
@@ -139,6 +126,18 @@ def factorial(n):
     """
     pass
 
+def fib(n):
+    """
+    Given a non-negative integer n, computes the n-th fibonacci number.
+    The 0th fibonacci number is defined as 0
+    The 1th fibonacci number is defined as 1
+    The nth fibonacci number is defined as fib(n-1) + fib(n-2), if n >= 2
+
+    Examples:
+    >>> [fib(0), fib(1), fib(2), fib(3), fib(4), fib(5), fib(6)]
+    [0, 1, 1, 2, 3, 5, 8]
+    """
+    pass
 
 def largest_digit(n):
     """
@@ -291,26 +290,6 @@ def list_element(x, stuff):
     """
     pass
 
-def list_frequencies(stuff):
-    """
-    Given a list of values, list_frequencies returns a dictionary
-    that contains the occurence count of each element in the list.
-    
-    Examples:
-    >>> list_frequencies([])
-    {}
-    
-    >>> list_frequencies(['beep'])
-    {'beep': 1}
-
-    >>> list_frequencieslement(['beep', 'boop'])
-    {'beep': 1, 'boop':  1}
-
-    >>> list_frequencieslement(['beep', 'boop', 'beep'])
-    {'beep': 2, 'boop': 1}
-    """
-    pass
-
 def list_mul_10(stuff):
     """
     Given a list of integers, returns another list of same size, in which
@@ -392,6 +371,27 @@ def list_replicate(n, x):
     ['beep']
     """
     pass
+
+def list_frequencies(stuff):
+    """
+    Given a list of values, list_frequencies returns a dictionary
+    that contains the occurence count of each element in the list.
+    
+    Examples:
+    >>> list_frequencies([])
+    {}
+    
+    >>> list_frequencies(['beep'])
+    {'beep': 1}
+
+    >>> list_frequencieslement(['beep', 'boop'])
+    {'beep': 1, 'boop':  1}
+
+    >>> list_frequencieslement(['beep', 'boop', 'beep'])
+    {'beep': 2, 'boop': 1}
+    """
+    pass
+
 
 def list_sort(stuff):
     """
