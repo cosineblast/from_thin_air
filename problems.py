@@ -120,7 +120,7 @@ def fib(n):
     >>> [fib(0), fib(1), fib(2), fib(3), fib(4), fib(5), fib(6)]
     [0, 1, 1, 2, 3, 5, 8]
     """
-    return n if n < 2 else solve(n-1) + solve(n-2)
+    pass
 
 def factorial(n):
     """
@@ -230,7 +230,7 @@ def list_sum(stuff):
     >>> list_sum(list(range(10)))
     45
     """
-    return 0 if stuff == [] else stuff[0] + solve(stuff[1:])
+    pass
 
 def list_product(stuff):
     """

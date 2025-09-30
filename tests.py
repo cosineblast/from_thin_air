@@ -28,7 +28,6 @@ except ImportError:
 
     console = BasicConsole()
 
-
 last_args = None
 
 
@@ -277,9 +276,14 @@ def import_problem_or_none(name):
     except AttributError:
         return None
 
+from collections import namedtuple
+
+total_skipped = 0  
 
 def run_test_case(test):
+    global total_skipped
     global current_test
+
     name = test["name"]
     implementation = test["implementation"]
     examples = test["examples"]
@@ -313,6 +317,12 @@ def run_test_case(test):
         did_call[0] = False
         expected = implementation(*example)
         got = getattr(problems, name)(*example)
+
+        if got == None:
+            total_skipped += 1
+            console.print('[bold white]skipped.[/bold white]')
+            return
+        
         ensure(
             expected == got,
             kind="wrong answer",
@@ -337,8 +347,14 @@ def main():
     for test in get_test_cases():
         run_test_case(test)
 
-    console.print("[green] well done![/green]")
-    console.print(" you may not know it now, but you have learned [red bold]recursion[/red bold]")
+    if total_skipped == 0:
+        console.print("[green] well done![/green]")
+        console.print(" you may not know it now, but you have learned [red bold]recursion[/red bold]")
+        console.print()
+    else:
+        console.print()
+        console.print(" You've still got some problems to [bold cyan]solve[/bold cyan]!")
+        console.print()
 
 
 if __name__ == "__main__":
