@@ -107,6 +107,35 @@ def get_test_cases():
         assert n >= 0
         return int(b**n)
 
+    @exercise(
+        [base(0), base(1)]
+        + [step(n) for n in range(2, 20)]
+    )
+    def fib(n):
+        assert isinstance(n, int)
+        assert n >= 0
+        a = 0
+        b = 1
+
+        for i in range(n):
+            a1 = b
+            b1 = a + b
+            a = a1
+            b = b1
+
+        return a
+
+
+    @exercise(
+        [base(0)]
+        + [step(n) for n in range(1, 10)]
+    )
+    def factorial(n):
+        assert isinstance(n, int)
+        assert n >= 0
+        return functools.reduce(lambda x,y: x * y, range(1, n+1), 1)
+
+
     @exercise([base(0)] + [step(n+1) for n in random_list(20)])
     def count_bits(n):
         return sum(map(int, '{:b}'.format(n)))
@@ -215,24 +244,6 @@ def get_test_cases():
         return list(sorted(x))
 
     return all_exercises
-
-    @exercise([base(1)] + [step(n+1) for n in random_list(20)])
-    def prime_factors(n):
-        assert isinstance(n, int)
-        assert n > 0
-
-        if n == 1: return set()
-
-        result = set()
-
-        for p in range(2, n+1):
-            if n % p == 0:
-                result.add(p)
-
-                while n % p == 0:
-                    n = n // p
-
-        return result
 
 
 current_test = None
